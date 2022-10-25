@@ -28,6 +28,7 @@ class World {
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.coin);
+        this.addObjectsToMap(this.level.bottel);
 
         this.ctx.translate(-this.camera_x, 0);
 
@@ -51,6 +52,13 @@ class World {
             this.ctx.scale(-1, 1);
             mo.x = mo.x * -1;
         }
+
+        this.ctx.beginPath();
+        this.ctx.lineWidth = '5';
+        this.ctx.strokeStyle = 'blue';
+        this.ctx.rect(mo.x, mo.y, mo.x + mo.height, mo.y + mo.width);
+        this.ctx.stroke();
+
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.height, mo.width);
         if (mo.otherDirection) {
             mo.x = mo.x * -1;

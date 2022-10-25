@@ -3,6 +3,12 @@ const level1 = new Level(
         new chicken(),
         new chicken(),
         new chicken(),
+        new chicken(),
+        new chicken(),
+        new chicken(),
+        new chicken(),
+        new chicken(),
+        new chicken(),
         new Endboss()
     ],
     [
@@ -45,6 +51,34 @@ const level1 = new Level(
 
         new Coin('img/8_coin/coin_2.png'),
         new Coin('img/8_coin/coin_2.png'),
+        new Coin('img/8_coin/coin_2.png'),
+        new Coin('img/8_coin/coin_2.png'),
         new Coin('img/8_coin/coin_2.png')
+    ],
+
+    [
+        new Bottel('img/6_salsa_bottle/1_salsa_bottle_on_ground.png'),
+        new Bottel('img/6_salsa_bottle/1_salsa_bottle_on_ground.png'),
+        new Bottel('img/6_salsa_bottle/1_salsa_bottle_on_ground.png'),
+        new Bottel('img/6_salsa_bottle/1_salsa_bottle_on_ground.png'),
+        new Bottel('img/6_salsa_bottle/1_salsa_bottle_on_ground.png'),
+
+        new Bottel('img/6_salsa_bottle/1_salsa_bottle_on_ground.png'),
+        new Bottel('img/6_salsa_bottle/1_salsa_bottle_on_ground.png'),
+        new Bottel('img/6_salsa_bottle/1_salsa_bottle_on_ground.png'),
+        new Bottel('img/6_salsa_bottle/1_salsa_bottle_on_ground.png'),
+        new Bottel('img/6_salsa_bottle/1_salsa_bottle_on_ground.png'),
+
+        new Bottel('img/6_salsa_bottle/2_salsa_bottle_on_ground.png'),
+        new Bottel('img/6_salsa_bottle/2_salsa_bottle_on_ground.png'),
+        new Bottel('img/6_salsa_bottle/2_salsa_bottle_on_ground.png'),
+        new Bottel('img/6_salsa_bottle/2_salsa_bottle_on_ground.png'),
+        new Bottel('img/6_salsa_bottle/2_salsa_bottle_on_ground.png'),
+
+        new Bottel('img/6_salsa_bottle/2_salsa_bottle_on_ground.png'),
+        new Bottel('img/6_salsa_bottle/2_salsa_bottle_on_ground.png'),
+        new Bottel('img/6_salsa_bottle/2_salsa_bottle_on_ground.png'),
+        new Bottel('img/6_salsa_bottle/2_salsa_bottle_on_ground.png'),
+        new Bottel('img/6_salsa_bottle/2_salsa_bottle_on_ground.png')
     ]
 );
