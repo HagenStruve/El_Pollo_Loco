@@ -22,6 +22,17 @@ class Character extends MovableObject {
         'img/2_character_pepe/3_jump/J-39.png'
     ];
 
+    IMAGES_DEAD = [
+        'img/2_character_pepe/5_dead/D-51.png',
+        'img/2_character_pepe/5_dead/D-52.png',
+        'img/2_character_pepe/5_dead/D-53.png',
+        'img/2_character_pepe/5_dead/D-54.png',
+        'img/2_character_pepe/5_dead/D-55.png',
+        'img/2_character_pepe/5_dead/D-56.png',
+        'img/2_character_pepe/5_dead/D-57.png'
+    ];
+    
+
     world;
     walking_sound = new Audio('audio/walking_on_sand.mp3')
 
@@ -30,6 +41,7 @@ class Character extends MovableObject {
         super().loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
+        this.loadImages(this.IMAGES_DEAD);
         this.applyGravity();
         this.animate();
     }
@@ -57,15 +69,18 @@ class Character extends MovableObject {
 
         setInterval(() => {
 
-            if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_JUMPING);
-            } else {
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES_DEAD);
+            } else
+                if (this.isAboveGround()) {
+                    this.playAnimation(this.IMAGES_JUMPING);
+                } else {
 
-                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                    if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
 
-                    this.playAnimation(this.IMAGES_WALKING);
+                        this.playAnimation(this.IMAGES_WALKING);
+                    }
                 }
-            }
         }, 50)
     }
 }
