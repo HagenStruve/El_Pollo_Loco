@@ -5,7 +5,10 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    statusBar = new StatusBar();
+    health_statusBar = new StatusBar(0);
+    bottle_statusBar = new StatusBar(40);
+    coin_statusBar = new StatusBar(80);
+
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -14,18 +17,27 @@ class World {
         this.draw();
         this.setWorld();
         this.checkCollisions();
+        this.loadStatusBars();
     }
 
     setWorld() {
         this.character.world = this;
     }
 
+    loadStatusBars() {
+        this.health_statusBar.setPercentage(100);
+        this.bottle_statusBar.setBottle(80);
+        this.coin_statusBar.setCoin(60);
+    }
+
     checkCollisions() {
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy) ) {
+                if (this.character.isColliding(enemy)) {
                     this.character.hit();
-                    this.statusBar.setPercentage(this.character.energy);
+                    this.health_statusBar.setPercentage(this.character.energy);
+                    this.bottle_statusBar.setBottle(this.character.energy+20);
+                    this.coin_statusBar.setCoin(this.character.energy);
                 }
             });
         }, 500);
@@ -39,7 +51,15 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0);
         // ----------- Space for fixed objects -----------
-        this.addToMap(this.statusBar);
+        this.addToMap(this.health_statusBar);
+        this.ctx.translate(this.camera_x, 0);
+        this.ctx.translate(-this.camera_x, 0);
+        // ----------- Space for fixed objects -----------
+        this.addToMap(this.bottle_statusBar);
+        this.ctx.translate(this.camera_x, 0);
+        this.ctx.translate(-this.camera_x, 0);
+        // ----------- Space for fixed objects -----------
+        this.addToMap(this.coin_statusBar);
         this.ctx.translate(this.camera_x, 0);
 
         this.addToMap(this.character);

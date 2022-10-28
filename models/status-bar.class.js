@@ -33,17 +33,18 @@ class StatusBar extends DrawableObject{
     coins = 0;
     
 
-    constructor() {
+    constructor(y) {
         super();
         this.loadImages(this.IMAGES_HEALT);
         this.loadImages(this.IMAGES_BOTTLE);
         this.loadImages(this.IMAGES_COIN);
         this.x = 25;
-        this.y = 0;
+        this.y = y;
         this.height = 200;
         this.width = 60;
         this.setPercentage(100);
-        this.setAssets(0, 0);
+        this.setBottle(100);
+        this.setCoin(60);
     }
 
     setPercentage(percentage) {
@@ -68,25 +69,44 @@ class StatusBar extends DrawableObject{
         }
     }
 
-    setAssets(bottles, coins) {
+    setBottle(bottles) {
         this.bottles = bottles;
-        this.coins = coins;
-        let bottle = this.IMAGES_BOTTLE[this.resolveImageIndexAssets()];
-        let coin = this.IMAGES_COIN[this.resolveImageIndexAssets()];
+        let bottle = this.IMAGES_BOTTLE[this.resolveImageIndexBottle()];
         this.img = this.imageCache[bottle];
+    }
+
+    resolveImageIndexBottle() {
+        if (this.bottles == 100) {
+            return 5;
+        } else if (this.bottles == 80) {
+            return 4;
+        } else if (this.bottles == 60) {
+            return 3;
+        } else if (this.bottles == 40) {
+            return 2;
+        } else if (this.bottles == 20) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    setCoin(coins) {
+        this.coins = coins;
+        let coin = this.IMAGES_COIN[this.resolveImageIndexCoin()];
         this.img = this.imageCache[coin];
     }
 
-    resolveImageIndexAssets() {
-        if (this.bottles || this.coins == 100) {
+    resolveImageIndexCoin() {
+        if (this.coins == 100) {
             return 5;
-        } else if (this.bottles || this.coins == 80) {
+        } else if (this.coins == 80) {
             return 4;
-        } else if (this.bottles || this.coins == 60) {
+        } else if (this.coins == 60) {
             return 3;
-        } else if (this.bottles || this.coins == 40) {
+        } else if (this.coins == 40) {
             return 2;
-        } else if (this.bottles || this.coins == 20) {
+        } else if (this.coins == 20) {
             return 1;
         } else {
             return 0;
