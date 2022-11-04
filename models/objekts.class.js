@@ -1,6 +1,12 @@
 class Coin extends MovableObject {
     width = 100;
     height = 100;
+    offset = {
+        top: 50,
+        bottom: 25,
+        left: 50,
+        right: 25
+    };
 
     constructor(imagePath){
         super().loadImage(imagePath);
@@ -13,6 +19,12 @@ class Coin extends MovableObject {
 class Bottel extends MovableObject {
     width = 80;
     height = 80;
+    offset = {
+        top: 40,
+        bottom: 20,
+        left: 40,
+        right: 20
+    };
     y = 360;
 
     constructor(imagePath){

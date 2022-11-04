@@ -5,6 +5,14 @@ class MovableObject extends DrawableObject {
     acceleration = 2.5;
     energy = 100;
     lastHit = 0;
+    collectedCoin = 0;
+    collectedbottles = 20;
+    offset = {
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0
+    };
 
 
     isColliding(mo) {
@@ -14,6 +22,13 @@ class MovableObject extends DrawableObject {
             this.x < mo.x + mo.height;
     }
 
+    isCollect(mo) {
+        return this.y + this.width - this.offset.left > mo.y - mo.offset.right &&
+            this.x + this.height - this.offset.top > mo.x - mo.offset.right &&
+            this.y + this.offset.bottom < mo.y + mo.width - mo.offset.left &&
+            this.x + this.offset.right < mo.x + mo.height - mo.offset.top;
+    }
+
     hit() {
         this.energy -= 20;
         if (this.energy < 0) {
@@ -21,6 +36,27 @@ class MovableObject extends DrawableObject {
         } else {
             this.lastHit = new Date().getTime();
         }
+    }
+
+    loseBottle() {
+      
+        if (this.collectedbottles > 0) {
+            this.collectedbottles -= 20;
+        } 
+    }
+
+    collectbottles() {
+        this.collectedbottles += 20;
+        if (this.collectedbottles > 100) {
+            this.collectedbottles = 100;
+        } 
+    }
+
+    collectCoin() {
+        this.collectedCoin += 20;
+        if (this.collectedCoin > 100) {
+            this.collectedCoin = 100;
+        } 
     }
 
     isHurt() {
@@ -59,6 +95,9 @@ class MovableObject extends DrawableObject {
 
 
     isAboveGround() {
+        if (this instanceof ThrowableObject) { // Throwable object should always fall
+            return true;
+        } else
         return this.y < 260
     }
 

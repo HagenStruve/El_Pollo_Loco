@@ -27,11 +27,11 @@ class DrawableObject {
     }
 
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof chicken) {
+        if (this instanceof chicken || this instanceof ThrowableObject) {
             ctx.beginPath();
             ctx.lineWidth = '5';
             ctx.strokeStyle = 'blue';
-            ctx.rect(this.x, this.y, this.height, this.width);
+            ctx.rect(this.x + this.offset.right, this.y + this.offset.bottom, this.height - this.offset.top, this.width - this.offset.left);
             ctx.stroke();
         }
     }

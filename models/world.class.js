@@ -8,6 +8,7 @@ class World {
     health_statusBar = new StatusBar(0);
     bottle_statusBar = new StatusBar(40);
     coin_statusBar = new StatusBar(80);
+    thowableObjects = [];
 
 
     constructor(canvas, keyboard) {
@@ -16,7 +17,9 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollisions();
+        this.run();
+        this.checkHitEnemie();
+        this.checkCollect();
         this.loadStatusBars();
     }
 
@@ -26,21 +29,70 @@ class World {
 
     loadStatusBars() {
         this.health_statusBar.setPercentage(100);
-        this.bottle_statusBar.setBottle(80);
-        this.coin_statusBar.setCoin(60);
+        this.bottle_statusBar.setBottle(0);
+        this.coin_statusBar.setCoin(0);
+    }
+
+    run() {
+        setInterval(() => {
+
+            this.checkCollisions();
+            this.checkThrowableObjects();
+        }, 500);
     }
 
     checkCollisions() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+                this.character.hit();
+                this.health_statusBar.setPercentage(this.character.energy);
+            }
+        });
+    }
+
+    checkThrowableObjects() {
+        if (this.keyboard.SPACE && this.character.collectedbottles > 0) {
+            let bottle = new ThrowableObject(this.character.x + 50, this.character.y + 100, this.character.otherDirection);
+            this.thowableObjects.push(bottle);
+            this.character.loseBottle();
+            this.bottle_statusBar.setBottle(this.character.collectedbottles);
+            console.log('wurf', this.thowableObjects)
+        }
+    }
+
+    checkHitEnemie() {
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy)) {
-                    this.character.hit();
-                    this.health_statusBar.setPercentage(this.character.energy);
-                    this.bottle_statusBar.setBottle(this.character.energy+20);
-                    this.coin_statusBar.setCoin(this.character.energy);
+                this.thowableObjects.forEach((to) => {
+                    if (to.isCollect(enemy)) {
+                        this.deadChicken(enemy);
+                        console.log('DMG');
+                    }
+                });
+            });
+        }, 10);
+    }
+
+    checkCollect() {
+        setInterval(() => {
+            this.level.bottel.forEach((bottel) => {
+                if (this.character.isCollect(bottel)) {
+                    this.character.collectbottles();
+                    let index = this.level.bottel.indexOf(bottel);
+                    this.level.bottel.splice(index, 1);
+                }
+                this.bottle_statusBar.setBottle(this.character.collectedbottles);
+            });
+
+            this.level.coin.forEach((coin) => {
+                if (this.character.isCollect(coin)) {
+                    this.character.collectCoin();
+                    this.coin_statusBar.setCoin(this.character.collectedCoin);
+                    let index = this.level.coin.indexOf(coin);
+                    this.level.coin.splice(index, 1);
                 }
             });
-        }, 500);
+        }, 10);
     }
 
     draw() {
@@ -67,6 +119,7 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.coin);
         this.addObjectsToMap(this.level.bottel);
+        this.addObjectsToMap(this.thowableObjects);
 
         this.ctx.translate(-this.camera_x, 0);
 
