@@ -56,5 +56,10 @@ const level1 = new Level(
         new Bottel('img/6_salsa_bottle/2_salsa_bottle_on_ground.png'),
         new Bottel('img/6_salsa_bottle/2_salsa_bottle_on_ground.png'),
         new Bottel('img/6_salsa_bottle/2_salsa_bottle_on_ground.png')
+    ],
+
+    [
+        new Health('img/7_statusbars/3_icons/icon_health.png'),
+        new Health('img/7_statusbars/3_icons/icon_health.png')
     ]
 );

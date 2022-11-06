@@ -65,7 +65,8 @@ class World {
             this.level.enemies.forEach((enemy) => {
                 this.thowableObjects.forEach((to) => {
                     if (to.isCollect(enemy)) {
-                        this.deadChicken(enemy);
+                        let index = this.level.enemies.indexOf(enemy);
+                    this.level.enemies.splice(index, 1);
                         console.log('DMG');
                     }
                 });
@@ -90,6 +91,15 @@ class World {
                     this.coin_statusBar.setCoin(this.character.collectedCoin);
                     let index = this.level.coin.indexOf(coin);
                     this.level.coin.splice(index, 1);
+                }
+            });
+
+            this.level.health.forEach((health) => {
+                if (this.character.isCollect(health)) {
+                    this.character.collectHealth();
+                    this.health_statusBar.setPercentage(this.character.energy);
+                    let index = this.level.health.indexOf(health);
+                    this.level.health.splice(index, 1);
                 }
             });
         }, 10);
@@ -119,6 +129,7 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.coin);
         this.addObjectsToMap(this.level.bottel);
+        this.addObjectsToMap(this.level.health);
         this.addObjectsToMap(this.thowableObjects);
 
         this.ctx.translate(-this.camera_x, 0);

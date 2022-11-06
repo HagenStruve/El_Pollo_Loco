@@ -32,3 +32,20 @@ class Bottel extends MovableObject {
         this.x = 200 + Math.random() * 3000;
     }
 }
+
+    class Health extends MovableObject {
+        width = 80;
+        height = 80;
+        offset = {
+            top: 40,
+            bottom: 20,
+            left: 40,
+            right: 20
+        };
+    
+        constructor(imagePath){
+            super().loadImage(imagePath);
+            this.x = 200 + Math.random() * 3000;
+            this.y = 170 + Math.random() * 200;
+        }
+}

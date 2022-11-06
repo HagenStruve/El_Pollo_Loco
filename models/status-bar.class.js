@@ -28,6 +28,14 @@ class StatusBar extends DrawableObject{
         'img/7_statusbars/1_statusbar/1_statusbar_coin/blue/100.png'
     ];
 
+    ENDBOSS_LIVE = [
+        'img/7_statusbars/3_icons/icon_health_endboss.png',
+        'img/7_statusbars/3_icons/icon_health_endboss.png',
+        'img/7_statusbars/3_icons/icon_health_endboss.png',
+        'img/7_statusbars/3_icons/icon_health_endboss.png',
+        'img/7_statusbars/3_icons/icon_health_endboss.png'
+    ];
+
     percentage = 100;
     bottles = 0;
     coins = 0;

@@ -7,6 +7,7 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     collectedCoin = 0;
     collectedbottles = 20;
+    enemieLive = 100;
     offset = {
         top: 0,
         bottom: 0,
@@ -39,24 +40,30 @@ class MovableObject extends DrawableObject {
     }
 
     loseBottle() {
-      
+
         if (this.collectedbottles > 0) {
             this.collectedbottles -= 20;
-        } 
+        }
     }
 
     collectbottles() {
         this.collectedbottles += 20;
         if (this.collectedbottles > 100) {
             this.collectedbottles = 100;
-        } 
+        }
     }
 
     collectCoin() {
         this.collectedCoin += 20;
         if (this.collectedCoin > 100) {
             this.collectedCoin = 100;
-        } 
+        }
+    }
+
+    collectHealth(){
+        if (this.energy < 100) {
+            this.energy += 20;
+        }
     }
 
     isHurt() {
@@ -67,6 +74,14 @@ class MovableObject extends DrawableObject {
 
     isDead() {
         return this.energy == 0;
+    }
+
+    dmgChicken(){
+        this.enemieLive -= 100;
+    }
+
+    chickenIsDead() {
+        return this.enemieLive == 0;
     }
 
     playAnimation(images) {
@@ -98,7 +113,7 @@ class MovableObject extends DrawableObject {
         if (this instanceof ThrowableObject) { // Throwable object should always fall
             return true;
         } else
-        return this.y < 260
+            return this.y < 260
     }
 
 
