@@ -1,21 +1,266 @@
 @font-face {
     font-family: 'zabras';
-    src: url('fonts/Zabars.ttf')  format('truetype');
+    src: url('fonts/Zabars.ttf') format('truetype');
+}
+
+h1 {
+    font-size: 70px;
+    z-index: 2;
+}
+
+.d-none {
+    display: none;
+}
+
+.operating-instructions {
+    position: fixed;
+    left: 15px;
+    top: 15px;
+    z-index: 3;
+    font-size: calc(10px + (53 - 14) * ((100vw - 320px) / (1600 - 320)));
+}
+
+footer {
+    z-index: 3;
+    position: fixed;
+    bottom: 0;
+    font-size: calc(5px + (10 - 5) * ((100vw - 320px) / (1600 - 320)));
+    right: 0;
 }
 
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url('img/desert/desert-g3ca113544_1280.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size:100%;
     font-family: 'zabras', Arial, Helvetica, sans-serif;
     font-size: 64px;
     letter-spacing: 3px;
+    margin: 0;
 }
 
-canvas {
+.background-img {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    object-fit: cover;
+}
+
+.start-screen {
+    width: 720px;
+    height: 480px;
+    z-index: 4;
+    display: flex;
+    justify-content: center;
+}
+
+.play {
+    position: absolute;
+    cursor: pointer;
+    background-color: #D9A863;
+    width: 150px;
+    height: 40px;
+    border-radius: 100px;
+    border: 2px black solid;
+    margin-top: 1%;
+    font-size: 20px;
+}
+
+.play:hover {
+    background-color: #e4b97e;
+}
+
+.start-img {
+    width: 100%;
+    height: 100%;
+}
+
+.canvas {
     background-color: black;
+    display: block;
+    z-index: 2;
+}
+
+.responsiv-keys {
+    display: none;
+}
+
+.key {
+    border: 1px black solid;
+    border-radius: 100%;
+}
+
+.play-sound {
+    border: 1px black solid;
+    border-radius: 100%;
+    display: flex;
+    position: fixed;
+    z-index: 4;
+    width: 44px;
+    height: 44px;
+    justify-content: center;
+    align-items: center;
+    top: 10%;
+    right: 10%;
+    cursor: pointer;
+    background-color: rgb(243, 243, 243);
+}
+
+.play-sound:hover {
+    background-color: white;
+}
+
+.play-sound-img {
+    width: 80%;
+    height: 80%;
+}
+
+.play-sound-stopp {
+    border: 1px black solid;
+    border-radius: 100%;
+    display: flex;
+    position: fixed;
+    z-index: 4;
+    width: 44px;
+    height: 44px;
+    justify-content: center;
+    align-items: center;
+    top: 10%;
+    right: 10%;
+    cursor: pointer;
+    background-color: orange;
+}
+
+.play-sound-stopp:hover {
+    background-color: rgb(247, 178, 51);
+}
+
+
+@media only screen and (max-width: 760px) {
+    .canvas {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .start-screen {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    h1 {
+        display: none;
+    }
+
+    .operating-instructions {
+        display: none;
+    }
+
+    .responsiv-keys {
+        display: flex;
+        position: fixed;
+        z-index: 3;
+        width: 100%;
+        height: 20%;
+        justify-content: space-around;
+        align-items: flex-end;
+        bottom: 10px;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 40%;
+    }
+
+    .key {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: orange;
+        width: 44px;
+        height: 44px;
+        font-size: 40px;
+        text-align: center;
+    }
+
+    .bottle {
+        width: 40px;
+        height: 40px;
+    }
+
+    .set-to-landscape {
+        display: flex;
+        position: fixed;
+        z-index: 4;
+        width: 44px;
+        height: 44px;
+        top: 5%;
+        right: 5%;
+        font-size: calc(16px + (53 - 14) * ((100vw - 320px) / (1600 - 320)));
+    }
+}
+
+@media only screen and (max-height: 650px) {
+    .canvas {
+        height: 100vh;
+        width: 100%;
+    }
+
+    .start-screen {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    h1 {
+        display: none;
+    }
+
+    .operating-instructions {
+        display: none;
+    }
+
+    .responsiv-keys {
+        display: flex;
+        position: fixed;
+        z-index: 3;
+        width: 100%;
+        height: 20%;
+        justify-content: space-around;
+        align-items: flex-end;
+        bottom: 10px;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 40%;
+    }
+
+    .key {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: orange;
+        width: 44px;
+        height: 44px;
+        font-size: 40px;
+        text-align: center;
+    }
+
+    .bottle {
+        width: 40px;
+        height: 40px;
+    }
+
+    .set-to-landscape {
+        display: flex;
+        position: fixed;
+        z-index: 4;
+        width: 44px;
+        height: 44px;
+        top: 5%;
+        right: 5%;
+        font-size: calc(16px + (53 - 14) * ((100vw - 320px) / (1600 - 320)));
+    }
 }

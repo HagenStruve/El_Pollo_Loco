@@ -8,6 +8,7 @@ class MovableObject extends DrawableObject {
     collectedCoin = 0;
     collectedbottles = 20;
     enemieLive = 100;
+    timer = 0;
     offset = {
         top: 0,
         bottom: 0,
@@ -19,8 +20,15 @@ class MovableObject extends DrawableObject {
     isColliding(mo) {
         return this.y + this.width > mo.y &&
             this.x + this.height > mo.x &&
-            this.y < mo.y &&
+            // this.y < mo.y &&
             this.x < mo.x + mo.height;
+    }
+
+    isAboveColliding(mo) {
+        return this.y + 200 > mo.y &&
+        this.x + this.height > mo.x &&
+        this.y + 190 < mo.y &&
+        this.x < mo.x + mo.height;
     }
 
     isCollect(mo) {
@@ -31,7 +39,7 @@ class MovableObject extends DrawableObject {
     }
 
     hit() {
-        this.energy -= 20;
+        this.energy -= 10;
         if (this.energy < 0) {
             this.energy = 0;
         } else {
@@ -80,10 +88,6 @@ class MovableObject extends DrawableObject {
         this.enemieLive -= 100;
     }
 
-    chickenIsDead() {
-        return this.enemieLive == 0;
-    }
-
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];
@@ -93,10 +97,12 @@ class MovableObject extends DrawableObject {
 
     moveRight() {
         this.x += this.speed;
+        this.timer = 0;
     }
 
     moveLeft() {
         this.x -= this.speed;
+        this.timer = 0;
     }
 
     applyGravity() {
@@ -119,5 +125,6 @@ class MovableObject extends DrawableObject {
 
     jump() {
         this.speedY = 30;
+        this.timer = 0;
     }
 }
